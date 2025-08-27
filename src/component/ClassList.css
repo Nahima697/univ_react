@@ -1,0 +1,52 @@
+.class-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.class-card {
+  flex: 0 0 300px; 
+  
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.class-card:hover {
+  transform: scale(1.02);
+}
+
+.class-card h3 {
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.class-card p {
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+.class-card strong {
+  color: #000;
+}
+a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: aqua;
+}
