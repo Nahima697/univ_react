@@ -2,6 +2,7 @@ import type { ApiResponse } from '@/model/ApiResponse';
 import type Classroom from '@/model/Classroom';
 import { useState, useEffect } from 'react';
 import './ClassList.css'; 
+import { Link } from 'react-router-dom';
 
 export default function ClassList() {
   const API_URL = "https://localhost/api";
@@ -26,8 +27,8 @@ export default function ClassList() {
   }, []);
 
  return (
-  <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
-    <h2 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
+  <div className='container' >
+    <h2>
        Liste des cours
     </h2>
 
@@ -47,23 +48,17 @@ export default function ClassList() {
             })}
           </p>
           {classRoom.isTooLate && (
-            <p  style={{ color: 'red', fontWeight: 'bold' }}> La Date d'inscription est dépassée</p>
+            <p className='fullOrFinish'> La Date d'inscription est dépassée</p>
           )}
           <p>
             <strong>Étudiants inscrits :</strong> {classRoom.nbStudents}
           </p>
              {classRoom.isFull && (
-            <p style={{ color: 'red', fontWeight: 'bold' }}>Ce cours est complet</p>
+            <p className='fullOrFinish'>Ce cours est complet</p>
             )}
             {!classRoom.isFull && (
-            <a
-                href={`/register/${classRoom.id}`}  
-                style={{
-                
-                }}
-                >
-                S'inscrire
-            </a>
+            
+        <Link to={`/register/${classRoom.id}`} className='link'>S'inscrire</Link>
          )}
         </div>
       ))}

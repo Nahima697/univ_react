@@ -1,5 +1,5 @@
 import { APITester } from "./APITester";
-import ClassList from "./component/ClassList";
+import ClassList from "./view/ClassList";
 import "./index.css";
 
 export function App() {
