@@ -11,9 +11,11 @@ export default function ClassList() {
     fetch(`${API_URL}/classrooms`)
       .then(res => res.json())
       .then((data: ApiResponse<Classroom>) => {
-        const parsedData = data.member.map((item) => ({
-          ...item,
-          registerDeadline: new Date(item.registerDeadline),
+        const parsedData = data.member.map((classroom:Classroom) => ({
+          ...classroom,
+          registerDeadline: new Date(classroom.registerDeadline),
+          isFull: classroom.capacity===classroom.nbStudents,
+          isTooLate:classroom.registerDeadline.getTime()> Date.now()
         }));
         setClassRooms(parsedData);
       })
@@ -43,17 +45,25 @@ export default function ClassList() {
               day: 'numeric',
             })}
           </p>
+          {classRoom.isTooLate && (
+            <p  style={{ color: 'red', fontWeight: 'bold' }}> La Date d'inscription est dépassée</p>
+          )}
           <p>
             <strong>Étudiants inscrits :</strong> {classRoom.nbStudents}
           </p>
-          <a
-            href={`/register/${classRoom.id}`}  
-            style={{
-             
-            }}
-            >
-            S'inscrire
-            </a>
+             {classRoom.isFull && (
+            <p style={{ color: 'red', fontWeight: 'bold' }}>Ce cours est complet</p>
+            )}
+            {!classRoom.isFull && (
+            <a
+                href={`/register/${classRoom.id}`}  
+                style={{
+                
+                }}
+                >
+                S'inscrire
+                </a>
+         )}
         </div>
       ))}
     </div>
