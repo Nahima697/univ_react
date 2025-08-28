@@ -15,9 +15,10 @@ export default function ClassList() {
           ...classroom,
           registerDeadline: new Date(classroom.registerDeadline),
           isFull: classroom.capacity===classroom.nbStudents,
-          isTooLate:classroom.registerDeadline.getTime()> Date.now()
-        }));
+          isTooLate:classroom.registerDeadline.toLocaleString() === Date.now().toLocaleString()
+    }));
         setClassRooms(parsedData);
+        console.log(parsedData);
       })
       .catch(err => {
         console.error("Erreur dans le fetch :", err);
@@ -27,7 +28,7 @@ export default function ClassList() {
  return (
   <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
     <h2 style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-      📚 Liste des cours
+       Liste des cours
     </h2>
 
     <div className="class-list-container">
@@ -62,7 +63,7 @@ export default function ClassList() {
                 }}
                 >
                 S'inscrire
-                </a>
+            </a>
          )}
         </div>
       ))}

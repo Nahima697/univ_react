@@ -1,7 +1,7 @@
-export function Form() {
+export  default function Form() {
 
     function submit() {
-        
+
     }
 
     return (
@@ -16,12 +16,6 @@ export function Form() {
     <input type="text" id="prenom" name="prenom" required />
   </div>
 
-  <div>
-    <label htmlFor="classe">Classe :</label>
-    <select id="classe" name="classe" required>
-      <option value="">-- Sélectionnez une classe --</option>
-    </select>
-  </div>
 
   <div>
     <label htmlFor="dateInscription">Date d'inscription :</label>
