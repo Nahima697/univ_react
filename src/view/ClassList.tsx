@@ -3,27 +3,24 @@ import type Classroom from '@/model/Classroom';
 import { useState, useEffect } from 'react';
 import './ClassList.css'; 
 import { Link } from 'react-router-dom';
+import classListService from '@/service/ClassListService';
 
 export default function ClassList() {
-  const API_URL = "https://localhost/api";
-  const [classRooms, setClassRooms] = useState<Classroom[]>([]);
+  const [classrooms, setClassrooms] = useState<Classroom[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/classrooms`)
-      .then(res => res.json())
-      .then((data: ApiResponse<Classroom>) => {
-        const parsedData = data.member.map((classroom:Classroom) => ({
-          ...classroom,
-          registerDeadline: new Date(classroom.registerDeadline),
-          isFull: classroom.capacity===classroom.nbStudents,
-          isTooLate:classroom.registerDeadline.toLocaleString() === Date.now().toLocaleString()
-    }));
-        setClassRooms(parsedData);
-        console.log(parsedData);
-      })
-      .catch(err => {
+    async function fetchData() {
+      try {
+        const data = await classListService();
+        setClassrooms(data);
+      } catch (err: any) {
         console.error("Erreur dans le fetch :", err);
-      });
+        setError(err.message || "Une erreur est survenue.");
+      }
+    }
+
+    fetchData();
   }, []);
 
  return (
@@ -31,34 +28,35 @@ export default function ClassList() {
     <h2>
        Liste des cours
     </h2>
+ {error && <div className="error-message">{error}</div>}
 
     <div className="class-list-container">
-      {classRooms.map((classRoom) => (
-        <div className="class-card" key={classRoom.id}>
-          <h3>🎓 {classRoom.name}</h3>
+      {classrooms.map((classroom) => (
+        <div className="class-card" key={classroom.id}>
+          <h3>🎓 {classroom.name}</h3>
           <p>
-            <strong>Capacité :</strong> {classRoom.capacity}
+            <strong>Capacité :</strong> {classroom.capacity}
           </p>
           <p>
             <strong>Date butoir :</strong>{' '}
-            {classRoom.registerDeadline.toLocaleDateString('fr-FR', {
+            {classroom.registerDeadline.toLocaleDateString('fr-FR', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
           </p>
-          {classRoom.isTooLate && (
+          {classroom.isTooLate && (
             <p className='fullOrFinish'> La Date d'inscription est dépassée</p>
           )}
           <p>
-            <strong>Étudiants inscrits :</strong> {classRoom.nbStudents}
+            <strong>Étudiants inscrits :</strong> {classroom.nbStudents}
           </p>
-             {classRoom.isFull && (
+             {classroom.isFull && (
             <p className='fullOrFinish'>Ce cours est complet</p>
             )}
-            {!classRoom.isFull && (
+            {!classroom.isFull && (
             
-        <Link to={`/register/${classRoom.id}`} className='link'>S'inscrire</Link>
+        <Link to={`/register/${classroom.id}`} className='link'>S'inscrire</Link>
          )}
         </div>
       ))}
