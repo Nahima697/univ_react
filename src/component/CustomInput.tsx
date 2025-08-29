@@ -9,6 +9,7 @@ type CustomInputProps = {
     id:string,
     type?: InputType,
     required:boolean;
+    register?: any; 
 };
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -20,6 +21,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
     type = 'text',
     id,
     required =false,
+   register,
+  
 }) => {
     return (
         <div className="input_wrapp">
@@ -33,6 +36,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     name={name}
                     id={id}
                     required={required}
+                    {...register}
 
                 />
             </div>
