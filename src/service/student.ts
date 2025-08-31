@@ -1,12 +1,12 @@
 import type Student from "@/model/Student";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { API_URL } from "@/config";
 
 export async function registerStudent(
   formData: Omit<Student, 'id'>,
   classroomId: string,
 ): Promise<any> {
- const API_URL = "https://localhost/api";
+
+
   const response = await fetch(`${API_URL}/students`, {
     method: "POST",
     headers: {
@@ -14,6 +14,7 @@ export async function registerStudent(
     },
     body: JSON.stringify({
       ...formData,
+        registeredAt: new Date().toISOString(),
       classroom: `/api/classrooms/${classroomId}`,
     }),
   });

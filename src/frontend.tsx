@@ -10,6 +10,7 @@ import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Form from "./view/Form";
+import ClassroomDetail from "./view/ClassroomDetail";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -18,6 +19,7 @@ const app = (
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/register/:id" element={<Form />} />
+          <Route path="/classromm/:id" element={<ClassroomDetail/>}/>
         </Routes>
       </BrowserRouter>
   </StrictMode>

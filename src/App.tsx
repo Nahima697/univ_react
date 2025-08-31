@@ -1,13 +1,16 @@
 import { APITester } from "./APITester";
 import ClassList from "./view/ClassList";
 import "./index.css";
+import Navbar from "./component/Navbar";
+import Hero from "./component/Hero";
 
 export function App() {
   return (
     <div className="app">
+      <Navbar />
       <div className="logo-container">
         <svg
-          className="logo bun-logo"
+          className="logo"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 64 64"
           width="96"
@@ -25,9 +28,8 @@ export function App() {
           <rect x="16" y="44" width="32" height="4" fill="#ccc" />
           <circle cx="32" cy="28" r="6" fill="#333" />
         </svg>
+      <Hero />
       </div>
-
-      {/* <APITester /> */}
       <ClassList />
     </div>
   );

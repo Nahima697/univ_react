@@ -3,25 +3,23 @@ type InputType = 'text' | 'password' | 'email' | 'number' | 'search' | 'tel' | '
 type CustomInputProps = {
     icon?: React.ReactNode;
     placeholder?: string;
-    value: string;
+    value?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     name?: string;
     id:string,
     type?: InputType,
-    required:boolean;
+    required?:boolean;
     register?: any; 
 };
 
 const CustomInput: React.FC<CustomInputProps> = ({
     icon,
     placeholder,
-    value,
     onChange,
     name,
     type = 'text',
     id,
-    required =false,
-   register,
+    register,
   
 }) => {
     return (
@@ -31,11 +29,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 <input
                     type={type}
                     placeholder={placeholder}
-                    value={value}
                     onChange={onChange}
                     name={name}
                     id={id}
-                    required={required}
                     {...register}
 
                 />

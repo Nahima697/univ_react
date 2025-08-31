@@ -1,9 +1,9 @@
-import type { ApiResponse } from '@/model/ApiResponse';
+
 import type Classroom from '@/model/Classroom';
 import { useState, useEffect } from 'react';
 import './ClassList.css'; 
 import { Link } from 'react-router-dom';
-import classListService from '@/service/ClassListService';
+import classListService from '@/service/classroomService';
 
 export default function ClassList() {
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
@@ -38,7 +38,7 @@ export default function ClassList() {
             <strong>Capacité :</strong> {classroom.capacity}
           </p>
           <p>
-            <strong>Date butoir :</strong>{' '}
+            <strong>Date butoire :</strong>{' '}
             {classroom.registerDeadline.toLocaleDateString('fr-FR', {
               year: 'numeric',
               month: 'long',
@@ -58,8 +58,12 @@ export default function ClassList() {
             
         <Link to={`/register/${classroom.id}`} className='link'>S'inscrire</Link>
          )}
+        <Link to={`/classroom/${classroom.id}`} className='link'>
+      Voir le détail
+        </Link>
         </div>
       ))}
+      
     </div>
   </div>
 )
