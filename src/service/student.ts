@@ -1,12 +1,8 @@
 import type Student from "@/model/Student";
 import { API_URL } from "@/config";
+import type { ApiResponse } from "@/model/ApiResponse";
 
-export async function registerStudent(
-  formData: Omit<Student, 'id'>,
-  classroomId: string,
-): Promise<any> {
-
-
+const registerStudent = async (formData: Omit<Student, 'id'>,classroomId: string): Promise<Student> => {
   const response = await fetch(`${API_URL}/students`, {
     method: "POST",
     headers: {
@@ -14,7 +10,7 @@ export async function registerStudent(
     },
     body: JSON.stringify({
       ...formData,
-        registeredAt: new Date().toISOString(),
+      registeredAt: new Date().toISOString(),
       classroom: `/api/classrooms/${classroomId}`,
     }),
   });
@@ -33,5 +29,38 @@ export async function registerStudent(
   }
 
   return await response.json();
-}
+};
 
+const getStudents = async (): Promise<Student[]> => {
+  const res = await fetch(`${API_URL}/students`, {
+    method: "GET",
+    credentials: 'include', // pour inclure le cookie où se trouve le token
+  });
+
+  if (!res.ok) {
+    if (res.status === 503) {
+      throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
+    }
+    throw new Error(`Erreur HTTP : ${res.status}`);
+  }
+
+  const data: ApiResponse<Student> = await res.json();
+
+  return data.member.map((student: Student) => ({
+    ...student,
+  }));
+};
+
+const deleteStudent = async (id: string): Promise<void> => {
+  const res = await fetch(`${API_URL}/students/${id}`, {
+    method: "DELETE",
+    credentials: 'include', 
+  });
+
+  if (!res.ok) {
+    throw new Error(`Erreur HTTP : ${res.status}`);
+  }
+};
+
+
+export { registerStudent, getStudents };

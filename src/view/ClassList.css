@@ -61,11 +61,13 @@ h2 {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin-right: 10px;
 }
 
 .link:hover {
     background-color: rgba(255,255,255,0.1);
     color: #fff;
+    
 }
 
 .fullOrFinish  {

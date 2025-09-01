@@ -4,6 +4,7 @@ export  default interface Classroom {
     name:string,
     capacity:number,
     registerDeadline:Date,
+    description:string,
     isTooLate:boolean,
     nbStudents:number,
     isFull:boolean

@@ -3,7 +3,7 @@ import type Classroom from '@/model/Classroom';
 import { useState, useEffect } from 'react';
 import './ClassList.css'; 
 import { Link } from 'react-router-dom';
-import classListService from '@/service/classroomService';
+import { classroomList } from '@/service/classroomService';
 
 export default function ClassList() {
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
@@ -12,7 +12,7 @@ export default function ClassList() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await classListService();
+        const data = await classroomList();
         setClassrooms(data);
       } catch (err: any) {
         console.error("Erreur dans le fetch :", err);

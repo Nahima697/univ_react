@@ -101,7 +101,9 @@ h1 {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+.link {
+  font-weight: bold;
+}
 .navbar-menu-desktop {
   display: none;
   gap: 1.5rem;

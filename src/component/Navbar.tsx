@@ -33,8 +33,8 @@ export default function Navbar() {
         {/* Menu Desktop */}
         <div className="navbar-menu-desktop">
           <Link to="/">Accueil</Link>
-          <Link to="/classes">Cours</Link>
-          <Link to="/admin" className="font-semibold">Admin</Link>
+          <Link to="/classList">Cours</Link>
+          <Link to="/admin" className="link-menu">Admin</Link>
         </div>
 
         {/* Menu Mobile */}
@@ -49,8 +49,8 @@ export default function Navbar() {
       {isOpen && (
         <div className="mobile-menu">
           <Link to="/" onClick={() => setIsOpen(false)}>Accueil</Link>
-          <Link to="/classes" onClick={() => setIsOpen(false)}>Cours</Link>
-          <Link to="/admin" className="font-semibold" onClick={() => setIsOpen(false)}>Admin</Link>
+          <Link to="/classList" onClick={() => setIsOpen(false)}>Cours</Link>
+          <Link to="/admin" className="link-menu" onClick={() => setIsOpen(false)}>Admin</Link>
         </div>
       )}
     </nav>

@@ -1,13 +1,68 @@
 import type Classroom from '@/model/Classroom';
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { classroomDetail } from '@/service/classroomService';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 export default function ClassroomDetail() {
-const { id } = useParams();
-const [classroom,setClassroom]=useState<Classroom>();
+  const { id } = useParams();
+  const [classroom, setClassroom] = useState<Classroom | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
-    return(
-        <div> Cours</div>
-    )
 
+  useEffect(() => {
+    async function fetchData() {
+      if (!id) return; 
+      try {
+        const data = await classroomDetail(id);
+        setClassroom(data);
+      } catch (err: any) {
+        console.error("Erreur dans le fetch :", err);
+        setErrorMessage(err.message || "Une erreur est survenue.");
+      }
+    }
+
+    fetchData();
+  }, [id]);
+
+  if (errorMessage) {
+    return <div className="error-message">{errorMessage}</div>;
+  }
+
+  if (!classroom) {
+    return <div>Chargement...</div>;
+  }
+
+  return (
+    <div className='container'>
+      <h2>Détail du cours</h2>
+
+      <div className="class-card">
+        <h3>🎓 {classroom.name}</h3>
+        <p>
+          <strong>Capacité :</strong> {classroom.capacity}
+        </p>
+        <p>
+          <strong>Date butoire :</strong>{" "}
+          {classroom.registerDeadline.toLocaleDateString("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+        {classroom.isTooLate && (
+          <p className="fullOrFinish">La date d'inscription est dépassée</p>
+        )}
+        <p>
+          <strong>Étudiants inscrits :</strong> {classroom.nbStudents}
+        </p>
+        {classroom.isFull && (
+          <p className="fullOrFinish">Ce cours est complet</p>
+        )}
+        {!classroom.isFull && !classroom.isTooLate && (
+          <Link to={`/register/${classroom.id}`} className="link">
+            S'inscrire
+          </Link>
+        )}
+      </div>
+    </div>
+  );
 }
