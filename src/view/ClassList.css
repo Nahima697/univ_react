@@ -7,7 +7,7 @@ h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
     text-align: center; 
-    color: #fff; /* titre en blanc */
+    color: #fff; 
 }
 
 .class-list-container {
@@ -21,11 +21,11 @@ h2 {
 
 .class-card {
   flex: 0 0 300px; 
-  border: 1px solid rgba(255,255,255,0.6); /* bordure blanche translucide */
+  border: 1px solid rgba(255,255,255,0.6); 
   padding: 1.5rem;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.05); /* fond très transparent */
-  color: #fff; /* texte blanc */
+  background-color: rgba(255, 255, 255, 0.05); 
+  color: #fff; 
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -37,17 +37,21 @@ h2 {
 
 .class-card h3 {
   margin-bottom: 0.8rem;
-  color: #fff; /* titre card en blanc */
+  color: #fff; 
 }
 
 .class-card p {
   margin-bottom: 0.5rem;
-  color: rgba(255,255,255,0.9); /* texte légèrement transparent */
+  color: rgba(255,255,255,0.9); 
+  max-width: 450px;
+  line-height: 2.5;
+  font-size:18px;
 }
 
 .class-card strong {
   color: #fff;
 }
+
 
 .link {
     display: inline-block;

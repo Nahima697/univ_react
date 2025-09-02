@@ -7,6 +7,7 @@ export  default interface Classroom {
     description:string,
     isTooLate:boolean,
     nbStudents:number,
-    isFull:boolean
+    isFull:boolean,
+    freespot:number
 
 }

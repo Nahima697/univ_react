@@ -19,6 +19,7 @@ const  classroomList =  async (): Promise<Classroom[]> =>{
     registerDeadline: new Date(classroom.registerDeadline),
     isFull: classroom.capacity === classroom.nbStudents,
     isTooLate: new Date(classroom.registerDeadline) < new Date(),
+    freespot: classroom.capacity - classroom.nbStudents
   }));
 }
 
@@ -31,13 +32,14 @@ const classroomDetail = async (id: string): Promise<Classroom> => {
     throw new Error(`Erreur HTTP : ${res.status}`);
   }
 
-  const data: Classroom = await res.json();
+  const classroom: Classroom = await res.json();
 
   return {
-    ...data,
-    registerDeadline: new Date(data.registerDeadline),
-    isFull: data.capacity === data.nbStudents,
-    isTooLate: new Date(data.registerDeadline) < new Date(),
+    ...classroom,
+    registerDeadline: new Date(classroom.registerDeadline),
+    isFull: classroom.capacity === classroom.nbStudents,
+    isTooLate: new Date(classroom.registerDeadline) < new Date(),
+    freespot: classroom.capacity - classroom.nbStudents
   };
 };
 

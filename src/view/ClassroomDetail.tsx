@@ -38,7 +38,7 @@ export default function ClassroomDetail() {
       <div className="class-card">
         <h3>🎓 {classroom.name}</h3>
         <p>
-          <strong>Capacité :</strong> {classroom.capacity}
+          <strong>Description :</strong> {classroom.description}
         </p>
         <p>
           <strong>Date butoire :</strong>{" "}
@@ -52,7 +52,7 @@ export default function ClassroomDetail() {
           <p className="fullOrFinish">La date d'inscription est dépassée</p>
         )}
         <p>
-          <strong>Étudiants inscrits :</strong> {classroom.nbStudents}
+          <strong>Place restantes  :</strong> {classroom.freespot}
         </p>
         {classroom.isFull && (
           <p className="fullOrFinish">Ce cours est complet</p>

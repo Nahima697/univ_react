@@ -34,7 +34,7 @@ const registerStudent = async (formData: Omit<Student, 'id'>,classroomId: string
 const getStudents = async (): Promise<Student[]> => {
   const res = await fetch(`${API_URL}/students`, {
     method: "GET",
-    credentials: 'include', // pour inclure le cookie où se trouve le token
+    credentials: 'include', 
   });
 
   if (!res.ok) {

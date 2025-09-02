@@ -35,7 +35,7 @@ export default function ClassList() {
         <div className="class-card" key={classroom.id}>
           <h3>🎓 {classroom.name}</h3>
           <p>
-            <strong>Capacité :</strong> {classroom.capacity}
+            <strong>Place restantes :</strong> {classroom.freespot}
           </p>
           <p>
             <strong>Date butoire :</strong>{' '}

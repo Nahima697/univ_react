@@ -33,7 +33,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     name={name}
                     id={id}
                     {...register}
-
                 />
             </div>
         </div>
