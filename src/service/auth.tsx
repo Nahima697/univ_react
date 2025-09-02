@@ -8,17 +8,18 @@ const auth = async (data:User) => {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include', 
+
     body: JSON.stringify(data),
     });
+
         
      if (!res.ok) {
+        console.log(data)
     if (res.status === 503) {
       throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
     }
     throw new Error(`Erreur HTTP : ${res.status}`);
   }
-
 }
 
 export {auth}

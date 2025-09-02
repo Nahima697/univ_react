@@ -12,6 +12,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Form from "./view/Form";
 import ClassroomDetail from "./view/ClassroomDetail";
 import ClassList from "./view/ClassList";
+import Login from "./view/Login";
+import Admin from "./view/admin/admin";
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -19,9 +21,11 @@ const app = (
        <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/login" element= {<Login/>} />
           <Route path="/register/:id" element={<Form />} />
           <Route path="/classList" element={<ClassList/>}/>
           <Route path="/classroom/:id" element={<ClassroomDetail/>}/>
+          <Route path="/admin" element={<Admin/>}/>
         </Routes>
       </BrowserRouter>
   </StrictMode>

@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="navbar-menu-desktop">
           <Link to="/">Accueil</Link>
           <Link to="/classList">Cours</Link>
-          <Link to="/admin" className="link-menu">Admin</Link>
+          <Link to="/login" className="link-menu">Connexion</Link>
         </div>
 
         {/* Menu Mobile */}

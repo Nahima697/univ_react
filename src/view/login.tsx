@@ -5,15 +5,19 @@ import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { AiFillLock, AiOutlineMail } from "react-icons/ai";
 import Navbar from "@/component/Navbar"; 
+import { Route, useNavigate } from "react-router-dom";
 
 type LoginFormValues = {
-  email: string;
+  username: string;
   password: string;
 };
 
 export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
 
+  let navigate = useNavigate();
+
+  let isLoggedIn = false;
   const {
     register,
     handleSubmit,
@@ -25,12 +29,15 @@ export default function Login() {
   const onSubmit: SubmitHandler<LoginFormValues> = async (formData) => {
     try {
       const data = await auth(formData);
-      console.log("Authentification réussie", data);
+      console.log("Authentification réussie");
+      isLoggedIn = true;
+      navigate('/admin', { replace: true });
     } catch (err: any) {
       console.error(err);
       setErrorMessage("Une erreur est survenue lors de la connexion.");
     }
   };
+  
 
   return (
     <main>
@@ -44,9 +51,9 @@ export default function Login() {
             icon={<AiOutlineMail />}
             type="email"
             placeholder="Renseignez votre email"
-            id="email"
-            name="email"
-            register={register("email", {
+            id="username"
+            name="username"
+            register={register("username", {
               required: "Email requis",
               pattern: {
                 value:
@@ -55,7 +62,7 @@ export default function Login() {
               },
             })}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.username && <p>{errors.username.message}</p>}
 
           <CustomInput
             icon={<AiFillLock />}
@@ -76,6 +83,7 @@ export default function Login() {
           <FormButton btnText="Se connecter" disabled={!isValid} />
         </form>
       </div>
+  
     </main>
   );
 }

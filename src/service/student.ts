@@ -63,4 +63,4 @@ const deleteStudent = async (id: string): Promise<void> => {
 };
 
 
-export { registerStudent, getStudents };
+export { registerStudent, getStudents,deleteStudent };

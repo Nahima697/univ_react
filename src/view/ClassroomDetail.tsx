@@ -1,3 +1,4 @@
+import Navbar from '@/component/Navbar';
 import type Classroom from '@/model/Classroom';
 import { classroomDetail } from '@/service/classroomService';
 import { useEffect, useState } from "react";
@@ -33,6 +34,7 @@ export default function ClassroomDetail() {
 
   return (
     <div className='container'>
+      <Navbar/>
       <h2>Détail du cours</h2>
 
       <div className="class-card">
