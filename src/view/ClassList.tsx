@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import './ClassList.css'; 
 import { Link } from 'react-router-dom';
 import { classroomList } from '@/service/classroomService';
+import { Alert, Snackbar } from '@mui/material';
 
 export default function ClassList() {
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
@@ -22,13 +23,22 @@ export default function ClassList() {
 
     fetchData();
   }, []);
+ const handleCloseError = () => {
+    setError(null); 
+  };
 
  return (
   <div className='container' >
     <h2>
        Liste des cours
     </h2>
- {error && <div className="error-message">{error}</div>}
+  {error && (
+         <Snackbar open={true} autoHideDuration={6000} onClose={handleCloseError}>
+           <Alert onClose={handleCloseError} severity="error">
+             {error}
+           </Alert>
+         </Snackbar>
+       )}
 
     <div className="class-list-container">
       {classrooms.map((classroom) => (

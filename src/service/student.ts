@@ -1,6 +1,7 @@
 import type Student from "@/model/Student";
 import { API_URL } from "@/config";
 import type { ApiResponse } from "@/model/ApiResponse";
+import { handleError } from "../component/handleError";
 
 const registerStudent = async (formData: Omit<Student, 'id'>,classroomId: string): Promise<Student> => {
   const response = await fetch(`${API_URL}/students`, {
@@ -16,10 +17,7 @@ const registerStudent = async (formData: Omit<Student, 'id'>,classroomId: string
   });
 
   if (!response.ok) {
-    if (response.status === 503) {
-      throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-    }
-
+   handleError(response, 'inscription');
     if (response.status === 422) {
       throw new Error("Le cours est complet. Attendez la prochaine session.");
     }
@@ -37,13 +35,7 @@ const getStudents = async (): Promise<Student[]> => {
     credentials: 'include', 
   });
 
-  if (!res.ok) {
-    if (res.status === 503) {
-      throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-    }
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
-
+ handleError(res, 'get student');
   const data: ApiResponse<Student> = await res.json();
 
   return data.member.map((student: Student) => ({
@@ -57,9 +49,7 @@ const deleteStudent = async (id: string): Promise<void> => {
     credentials: 'include', 
   });
 
-  if (!res.ok) {
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
+  handleError(res, 'delete student');
 };
 
 

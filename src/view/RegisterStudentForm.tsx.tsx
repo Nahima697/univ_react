@@ -14,7 +14,7 @@ type RegisterFormValues = {
   firstname: string;
   email: string;}
 
-export default function Form() {
+export default function RegisterStudentForm() {
   const { id } = useParams();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -30,6 +30,7 @@ export default function Form() {
     try {
       const data = await registerStudent(formData, id!);
       console.log("Inscription réussie", data);
+      alert("Inscription réussie");
     } catch (err: any) {
       console.error(err);
       setErrorMessage("Une erreur est survenue lors de l'inscription.");
@@ -89,14 +90,10 @@ export default function Form() {
 
     <FormButton btnText={"S'inscrire"} disabled={!isValid} />
   </form>
-
   <div className="form-image">
-    <img src={formImg} alt="Form illustration" />
+      <img src={formImg} alt="Form illustration" />
+    </div>
   </div>
-</div>
-
-
- 
-    </main>
+</main>
   );
 }

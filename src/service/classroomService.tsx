@@ -1,17 +1,12 @@
 import type { ApiResponse } from "@/model/ApiResponse";
 import type Classroom from "@/model/Classroom";
 import { API_URL } from "@/config";
+import { handleError } from "../component/handleError";
 
 
 const  classroomList =  async (): Promise<Classroom[]> =>{
   const res = await fetch(`${API_URL}/classrooms`);
-  if (!res.ok) {
-    if (res.status === 503) {
-      throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-    }
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
-
+  handleError(res, 'classroomList');
   const data: ApiResponse<Classroom> = await res.json();
 
   return data.member.map((classroom: Classroom) => ({
@@ -25,13 +20,7 @@ const  classroomList =  async (): Promise<Classroom[]> =>{
 
 const classroomDetail = async (id: string): Promise<Classroom> => {
   const res = await fetch(`${API_URL}/classrooms/${id}`);
-  if (!res.ok) {
-    if (res.status === 503) {
-      throw new Error("Le service est temporairement indisponible. Veuillez réessayer plus tard.");
-    }
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
-
+  handleError(res, 'classroomDetail');
   const classroom: Classroom = await res.json();
 
   return {
@@ -49,14 +38,11 @@ const createClassroom = async (classroom: Partial<Classroom>): Promise<Classroom
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: 'include', // pour inclure le cookie où se trouve le token
+    credentials: 'include', 
     body: JSON.stringify(classroom),
   });
 
-  if (!res.ok) {
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
-
+  handleError(res, 'createClassroom');
   return await res.json();
 };
 
@@ -70,12 +56,9 @@ const updateClassroom = async (id: string, updates: Partial<Classroom>, token: s
     body: JSON.stringify(updates),
   });
 
-  if (!res.ok) {
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
-
-  return await res.json();
-};
+  handleError(res, 'updateClassroom');
+    return await res.json();
+  };
 
 const deleteClassroom = async (id: string): Promise<void> => {
   const res = await fetch(`${API_URL}/classrooms/${id}`, {
@@ -83,9 +66,7 @@ const deleteClassroom = async (id: string): Promise<void> => {
     credentials: 'include', 
   });
 
-  if (!res.ok) {
-    throw new Error(`Erreur HTTP : ${res.status}`);
-  }
+  handleError(res, 'delete classroom');
 };
 
 

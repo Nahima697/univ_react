@@ -9,11 +9,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Form from "./view/Form";
 import ClassroomDetail from "./view/ClassroomDetail";
 import ClassList from "./view/ClassList";
 import Login from "./view/Login";
-import Admin from "./view/admin/admin";
+import { DashboardAdmin } from "./view/admin/DashboardAdmin";
+import RegisterStudentForm from "./view/RegisterStudentForm.tsx";
+
 
 const elem = document.getElementById("root")!;
 const app = (
@@ -22,10 +23,10 @@ const app = (
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element= {<Login/>} />
-          <Route path="/register/:id" element={<Form />} />
+          <Route path="/register/:id" element={<RegisterStudentForm />} />
           <Route path="/classList" element={<ClassList/>}/>
           <Route path="/classroom/:id" element={<ClassroomDetail/>}/>
-          <Route path="/admin" element={<Admin/>}/>
+          <Route path="/admin/*" element={<DashboardAdmin />} />
         </Routes>
       </BrowserRouter>
   </StrictMode>
