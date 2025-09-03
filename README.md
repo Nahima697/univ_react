@@ -74,9 +74,14 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 - Création du projet frontend avec **[Bun](https://bun.com/guides/ecosystem/react)** (gestionnaire de paquets très rapide, alternative à npm/yarn).
 
 ### Creation des composants
+- Utilisation de **[React Router](https://www.w3schools.com/react/react_router.asp)** pour les routes.
+- Affichage des **classrooms** dans des cards. Doc sur les **[props](https://react.dev/learn/passing-props-to-a-component)**
+    .Utilisation de useParam pour récupérer l'id dans le lien sur les cards pour fetch les datas de la classroom.
 - Mise en place d’un **formulaire d’inscription basique** **[Form](https://react.dev/reference/react-dom/components/form)** d’un étudiant en React.
+
 - Création de **CustomInput et de FormButton** **[CustomInput](https://medium.com/@amitsharma_24072/react-form-design-creating-custom-reusable-inputs-and-buttons-in-reactjs-c93e67ab2347)** 
 - Refactorisation avec **React Hook Form**[HookForm](https://react-hook-form.com)** pour la gestion des inputs, erreurs et validations.
+- Création du composant classroomDetail.
 
 #### Acces à l'environnement
 Avec Bun il n'est pas possible d'accéder au variable d'environnement côté front-end seulement au build contrairement à Next ou React avec un Bundle Vite par exemple. En effet, on ne peut pas faire un **process.env**. Par conséquent, j'ai mis en place un fichier de config où je stocke l'url de l'API.
