@@ -42,7 +42,9 @@ Développement d’une application web de type portail universitaire permettant 
 
 ## 🚀 Présentation rapide de React
 
-[React](https://reactjs.org/) est une librairie JavaScript développée par Meta pour créer des interfaces utilisateur dynamiques. Elle est basée sur des composants réutilisables et un DOM virtuel pour de meilleures performances.
+[React](https://reactjs.org) est une librairie JavaScript développée par Meta pour créer des interfaces utilisateur dynamiques. Elle est basée sur des composants réutilisables et un DOM virtuel pour de meilleures performances.
+
+[Bun](https://bun.com) est un gestionnaire de paquet , un runtime et un bundle Javascript.
 
 ---
 
@@ -69,9 +71,12 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 
 ### ⚡ Initialisation
 
-- Création du projet frontend avec **[Bun](https://bun.sh)** (gestionnaire de paquets très rapide, alternative à npm/yarn).
-- Mise en place d’un **formulaire d’inscription basique** d’un étudiant en React.
-- Refactorisation avec **React Hook Form** pour la gestion des inputs, erreurs et validations.
+- Création du projet frontend avec **[Bun](https://bun.com/guides/ecosystem/react)** (gestionnaire de paquets très rapide, alternative à npm/yarn).
+
+### Creation des composants
+- Mise en place d’un **formulaire d’inscription basique** **[Form](https://react.dev/reference/react-dom/components/form)** d’un étudiant en React.
+- Création de **CustomInput et de FormButton** **[CustomInput](https://medium.com/@amitsharma_24072/react-form-design-creating-custom-reusable-inputs-and-buttons-in-reactjs-c93e67ab2347)** 
+- Refactorisation avec **React Hook Form**[HookForm](https://react-hook-form.com)** pour la gestion des inputs, erreurs et validations.
 
 ### 💡 Structuration du code
 
@@ -92,8 +97,9 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 - Affichage de messages explicites à l'utilisateur (Refraiche en cas d'erreur 503, formulaire invalide…).
 
 
+### Difficultés
 
-- Difficulté rencontrée : ajout du champ `description` dans l'entité `Classroom` a causé un blocage au démarrage car la BDD n'était pas persisté en local.
+- Ajout du champ `description` dans l'entité `Classroom` a causé un blocage au démarrage car la BDD n'était pas persisté en local.
 - Résolu grâce à la **persistance des données en local** (`volumes` Docker).
 
 ---
@@ -115,7 +121,7 @@ doit avoir les mentions :
   set_cookies:
     BEARER: ~
 
--Difficultés rencontrés
+### Difficultés rencontrés
 Malgré de nombreuses tentatives de résolution:
     -creation d'un eventListener sur Symfony pour set le cookie celui-ci n'est pas stocké dans le navigateur. Par conséquent j'avais des erreurs 401 le token n'étant pas renvoyé dans les requêtes get de l'admin.
     -passage en https avec vite de l'url front
