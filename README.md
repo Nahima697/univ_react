@@ -78,6 +78,9 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 - Création de **CustomInput et de FormButton** **[CustomInput](https://medium.com/@amitsharma_24072/react-form-design-creating-custom-reusable-inputs-and-buttons-in-reactjs-c93e67ab2347)** 
 - Refactorisation avec **React Hook Form**[HookForm](https://react-hook-form.com)** pour la gestion des inputs, erreurs et validations.
 
+#### Acces à l'environnement
+Avec Bun il n'est pas possible d'accéder au variable d'environnement côté front-end seulement au build contrairement à Next ou React avec un Bundle Vite par exemple. En effet, on ne peut pas faire un **process.env**. Par conséquent, j'ai mis en place un fichier de config où je stocke l'url de l'API.
+
 ### 💡 Structuration du code
 
 - Création de **services dédiés** (`/services`) pour centraliser les requêtes API (CRUD).
@@ -86,7 +89,7 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 
 ### 🔐 Authentification & Admin
 
-- Mise en place de l’interface d'administration avec **React-Admin**.
+- Mise en place de l’interface d'administration avec **React-Admin** [ReactAdmin](https://marmelab.com/react-admin).
 - Difficultés rencontrées avec **Bun** seul (problème de dépendances `memoryStore`).
 - Solution : intégration de **Vite** pour supporter React-Admin correctement.
 
