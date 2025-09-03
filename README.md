@@ -48,7 +48,9 @@ Développement d’une application web de type portail universitaire permettant 
 
 ---
 
-## 🐳 Backend & Docker
+## 🐳 Backend & **[Docker](https://docs.docker.com/reference/cli/docker/)**
+
+L'Api que je consomme a été réalisée en  Symfony avec Api Platform et a été dockerisée. Il faut donc lancer les conteneurs en local et initialisé la BDD et l'alimenter de fixtures.
 
 ### Démarrage
 ```bash
