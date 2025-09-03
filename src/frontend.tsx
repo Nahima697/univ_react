@@ -11,9 +11,9 @@ import { App } from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ClassroomDetail from "./view/ClassroomDetail";
 import ClassList from "./view/ClassList";
-import Login from "./view/Login";
 import { DashboardAdmin } from "./view/admin/DashboardAdmin";
 import RegisterStudentForm from "./view/RegisterStudentForm.tsx";
+import Login from "./view/login.tsx";
 
 
 const elem = document.getElementById("root")!;

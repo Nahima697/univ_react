@@ -27,7 +27,13 @@ export default function ClassList() {
     setError(null); 
   };
 
+    if (!classrooms) {
+    return <div>Chargement...</div>;
+  }
+
+
  return (
+  
   <div className='container' >
     <h2>
        Liste des cours

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser, memoryStore } from "react-admin";
 import { Card, CardContent, Typography, Snackbar } from "@mui/material";
-import { Alert } from "@mui/material";  // Alert de MUI pour afficher les messages
-import { dataProvider } from "@/service/DataProvider";
+import { Alert } from "@mui/material";  
+import { dataProvider } from "@/service/dataProvider";
+
 
 export const DashboardAdmin = () => {
   const store = memoryStore();
