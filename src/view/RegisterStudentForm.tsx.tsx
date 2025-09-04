@@ -39,61 +39,61 @@ export default function RegisterStudentForm() {
 
   return (
     <main>
-        <Navbar />
+      <Navbar />
     
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
       <div className="form-container">
-  <form onSubmit={handleSubmit(onSubmit)} noValidate>
-    <CustomInput
-      icon={<AiOutlineUser />}
-      type="text"
-      placeholder="Renseignez votre nom"
-      id="name"
-      name="name"
-      register={register("name", {
-        required: "Nom requis",
-        minLength: { value: 2, message: "Nom trop court" },
-      })}
-    />
-    {errors.name && <p>{errors.name.message}</p>}
+    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <CustomInput
+        icon={<AiOutlineUser />}
+        type="text"
+        placeholder="Renseignez votre nom"
+        id="name"
+        name="name"
+        register={register("name", {
+          required: "Nom requis",
+          minLength: { value: 2, message: "Nom trop court" },
+        })}
+      />
+      {errors.name && <p>{errors.name.message}</p>}
 
-    <CustomInput
-      icon={<AiOutlineUser />}
-      type="text"
-      placeholder="Renseignez votre prénom"
-      id="firstname"
-      name="firstname"
-      register={register("firstname", {
-        required: "Prénom requis",
-        minLength: { value: 2, message: "Prénom trop court" },
-      })}
-    />
-    {errors.firstname && <p>{errors.firstname.message}</p>}
+      <CustomInput
+        icon={<AiOutlineUser />}
+        type="text"
+        placeholder="Renseignez votre prénom"
+        id="firstname"
+        name="firstname"
+        register={register("firstname", {
+          required: "Prénom requis",
+          minLength: { value: 2, message: "Prénom trop court" },
+        })}
+      />
+      {errors.firstname && <p>{errors.firstname.message}</p>}
 
-    <CustomInput
-      icon={<AiOutlineMail />}
-      type="email"
-      placeholder="Renseignez votre email"
-      id="email"
-      name="email"
-      register={register("email", {
-        required: "Email requis",
-        pattern: {
-          value:
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          message: "Format d'email invalide",
-        },
-      })}
-    />
-    {errors.email && <p>{errors.email.message}</p>}
+      <CustomInput
+        icon={<AiOutlineMail />}
+        type="email"
+        placeholder="Renseignez votre email"
+        id="email"
+        name="email"
+        register={register("email", {
+          required: "Email requis",
+          pattern: {
+            value:
+              /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            message: "Format d'email invalide",
+          },
+        })}
+      />
+      {errors.email && <p>{errors.email.message}</p>}
 
     <FormButton btnText={"S'inscrire"} disabled={!isValid} />
-  </form>
-  <div className="form-image">
-      <img src={formImg} alt="Form illustration" />
+    </form>
+    <div className="form-image">
+        <img src={formImg} alt="Form illustration" />
+      </div>
     </div>
-  </div>
 </main>
   );
 }

@@ -69,9 +69,6 @@ const deleteClassroom = async (id: string): Promise<void> => {
   handleError(res, 'delete classroom');
 };
 
-
-
-
 export { classroomList, classroomDetail,createClassroom,updateClassroom,deleteClassroom };
 
 

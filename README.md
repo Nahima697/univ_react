@@ -1,26 +1,15 @@
-# bun-react-template
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To start a development server:
-
-```bash
-bun dev
-```
-
-To run for production:
-
-```bash
-bun start
-```
-
-This project was created using `bun init` in bun v1.2.20. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
 
 # 🎓 Hippo University – Application d’Inscription Universitaire en React
+
+## Table des matières
+- [Installation](#installation)
+- [Backend avec Docker](#-backend--docker)
+- [Étapes de développement](#-étapes-de-développement)
+- [Authentification](#-authentification--admin)
+- [Évolutions possibles](#-évolutions-possibles)
+- [Conclusion](#conclusion)
+
 
 ## 🧰 Atelier choisi
 
@@ -42,15 +31,25 @@ Développement d’une application web de type portail universitaire permettant 
 
 ## 🚀 Présentation rapide de React
 
-[React](https://reactjs.org) est une librairie JavaScript développée par Meta pour créer des interfaces utilisateur dynamiques. Elle est basée sur des composants réutilisables et un DOM virtuel pour de meilleures performances.
+[React](https://reactjs.org) est une librairie JavaScript développée par Meta pour créer des interfaces utilisateur dynamiques. Elle est basée sur des composants réutilisables et un DOM virtuel(Dom en mémoire) pour de meilleures performances.
 
-[Bun](https://bun.com) est un gestionnaire de paquet , un runtime et un bundle Javascript.
+[Bun](https://bun.com) est un gestionnaire de paquet , un runtime et un bundler Javascript.
 
 ---
 
+## 🚀 Installation rapide
+
+### Frontend
+```bash
+bun install
+bun dev
+```
+
 ## 🐳 Backend & **[Docker](https://docs.docker.com/reference/cli/docker/)**
 
-L'Api que je consomme a été réalisée en  Symfony avec Api Platform et a été dockerisée. Il faut donc lancer les conteneurs en local et initialisé la BDD et l'alimenter de fixtures.
+### Backend
+
+L'Api que je consomme a été réalisée en  Symfony avec Api Platform et a été dockerisée. Il faut donc lancer les conteneurs en local et initialiser la BDD et l'alimenter de fixtures.
 
 ### Démarrage
 ```bash
@@ -64,7 +63,7 @@ docker compose down --remove-orphans
 ```
 
 #### Difficultés rencontrées
-Ajout du champ description dans Classroom → blocage car pas de persistance.
+Ajout du champ description dans classroom → blocage car pas de persistance.
 
 ✅ Solution : ajout de volumes Docker pour sauvegarder la base.
 
@@ -82,11 +81,12 @@ Ajout du champ description dans Classroom → blocage car pas de persistance.
 - Mise en place d’un **formulaire d’inscription basique** **[Form](https://react.dev/reference/react-dom/components/form)** d’un étudiant en React.
 
 - Création de **CustomInput et de FormButton** **[CustomInput](https://medium.com/@amitsharma_24072/react-form-design-creating-custom-reusable-inputs-and-buttons-in-reactjs-c93e67ab2347)** 
-- Refactorisation avec **React Hook Form**[HookForm](https://react-hook-form.com)** pour la gestion des inputs, erreurs et validations.
+- Refactorisation avec [React Hook Form](https://react-hook-form.com) pour la gestion des inputs, erreurs et validations.
 - Création du composant classroomDetail.
 
 #### Acces à l'environnement
-Avec Bun il n'est pas possible d'accéder au variable d'environnement côté front-end seulement au build contrairement à Next ou React avec un Bundle Vite par exemple. En effet, on ne peut pas faire un **process.env**. Par conséquent, j'ai mis en place un fichier de config où je stocke l'url de l'API.
+Avec Bun il n'est pas possible d'accéder aux variables d'environnement contrairement à Next ou React avec un Bundler Vite par exemple. En effet, on ne peut pas faire un **process.env**.Bun lance l'application via son server dans index.tsx qui construit l'index.html qui va pointer vers frontend.tsx qui est l'application React. On n'a donc plus accès aux fonctionnalités server de Bun. Il faudrait créer un fichier server et faire du SSR pour accéder aux fonctionnalités de celui-ci dont l'accès à l'environnement.
+Par conséquent, j'ai mis en place un fichier de config où je stocke l'url de l'API.
 
 ### 💡 Structuration du code
 
@@ -109,7 +109,7 @@ Avec Bun il n'est pas possible d'accéder au variable d'environnement côté fro
 
 ### Difficultés
 
-- Ajout du champ `description` dans l'entité `Classroom` a causé un blocage au démarrage car la BDD n'était pas persisté en local.
+- Ajout du champ `description` dans l'entité `Classroom` a causé un blocage au démarrage car la BDD n'était pas persistée en local.
 - Résolu grâce à la **persistance des données en local** (`volumes` Docker).
 
 ---
@@ -140,17 +140,15 @@ Malgré de nombreuses tentatives de résolution:
 Plus facile à gérer, il suffit de stocker le token à l'authentification dans un localstorage.
 
 
-## 🔁 Evolutions possibles
-
-- Gestion des rôles, connexion des étudiants
--Interface : intégrer Material UI ou Tailwind pour un design plus moderne.
-
--Amélioration UX : loader, retry automatique en cas de 503.
--Amélioration du dashboard admin, guard sur la page admin
-
--Tests : intégration de tests front (Jest + React Testing Library) et API (PHPUnit).
+## 🔮 Roadmap
+- [ ] Gestion des rôles et connexion étudiants
+- [ ] Intégrer Material UI ou Tailwind
+- [ ] Amélioration UX (loader, retry automatique en cas de 503)
+- [ ] Dashboard admin enrichi + guards
+- [ ] Tests front (Jest + React Testing Library)
+- [ ] Tests backend (PHPUnit)
 
 ## Conclusion
 
 Bon premier jet sur React, ce qui me faisait peur (manque de structure contrairement à un framework) est gérable si on s'impose une architecture en tentant de séparer la logique de service(fetch de donnée) et celle de view (interface). Bun est un gestionnaire de package très rapide mais il a montré quelques limites gestion de l'environnement compliqué en front et problème de  compatibilité des dépendances, un autre gestionnaire en complément commme Vite ou Webpack peut-être nécessaire.
-J'ai voulu gérer le token directement au niveau du serveur pour voir une autre manuère de faire avec les cookies HttpOnly, il faut que je creuse les conséquences en terme de sécurité et ce qu'il faut mettre en place en utilisant cette méthode. 
+J'ai voulu gérer le token directement au niveau du serveur pour voir une autre manière de faire avec les cookies HttpOnly, il faut que je creuse les conséquences en terme de sécurité et ce qu'il faut mettre en place en utilisant cette méthode. 

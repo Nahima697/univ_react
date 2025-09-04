@@ -6,11 +6,6 @@ const server = serve({
     // Serve index.html for all unmatched routes.
     "/*": index,
 
-        "/api/env": async req => {
-  return Response.json({
-    apiUrl: process.env.PUBLIC_API_URL,
-  });
-},
   },
 
   development: process.env.NODE_ENV !== "production" && {
